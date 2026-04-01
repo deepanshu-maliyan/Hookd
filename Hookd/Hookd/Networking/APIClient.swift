@@ -140,11 +140,10 @@ class APIClient {
     }
     
     func likeUser(targetUserId: String) async throws -> LikeResponse {
-        let body = LikeRequest(targetUserId: targetUserId)
         return try await request(
-            endpoint: AppConstants.Endpoints.like,
+            endpoint: "\(AppConstants.Endpoints.like)/\(targetUserId)",
             method: "POST",
-            body: body
+            body: nil as String?
         )
     }
     

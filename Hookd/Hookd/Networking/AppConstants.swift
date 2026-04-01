@@ -7,12 +7,12 @@ enum AppConstants {
     enum Endpoints {
         static let register = "/auth/register"
         static let login = "/auth/login"
-        static let streamToken = "/auth/stream-token"
+        static let streamToken = "/stream/token"
         static let me = "/users/me"
-        static let discovery = "/dating/discovery"
-        static let like = "/dating/like"
-        static let matches = "/dating/matches"
+        static let discovery = "/matching/discovery"
+        static let like = "/matching/like"
+        static let matches = "/matching/matches"
         static let confessions = "/confessions"
-        static let presignedUrl = "/upload/presigned-url"
+        static let presignedUrl = "/media/presigned-url"
     }
 }
