@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1FA452A42F7CFA0E00822BFA /* StreamChat in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA452A32F7CFA0E00822BFA /* StreamChat */; };
+		1FA452AA2F7CFA0E00822BFA /* StreamChatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA452A92F7CFA0E00822BFA /* StreamChatUI */; };
+		1FA452AD2F7CFA9B00822BFA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1FA452AC2F7CFA9B00822BFA /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1FA4524B2F7CE00700822BFA /* Hookd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hookd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FA452A42F7CFA0E00822BFA /* StreamChat in Frameworks */,
+				1FA452AA2F7CFA0E00822BFA /* StreamChatUI in Frameworks */,
+				1FA452AD2F7CFA9B00822BFA /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = Hookd;
 			packageProductDependencies = (
+				1FA452A32F7CFA0E00822BFA /* StreamChat */,
+				1FA452A92F7CFA0E00822BFA /* StreamChatUI */,
+				1FA452AC2F7CFA9B00822BFA /* Kingfisher */,
 			);
 			productName = Hookd;
 			productReference = 1FA4524B2F7CE00700822BFA /* Hookd.app */;
@@ -107,6 +119,10 @@
 			);
 			mainGroup = 1FA452422F7CE00700822BFA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1FA452A22F7CFA0E00822BFA /* XCRemoteSwiftPackageReference "stream-chat-swift" */,
+				1FA452AB2F7CFA9B00822BFA /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1FA4524C2F7CE00700822BFA /* Products */;
 			projectDirPath = "";
@@ -349,6 +365,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1FA452A22F7CFA0E00822BFA /* XCRemoteSwiftPackageReference "stream-chat-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GetStream/stream-chat-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.99.0;
+			};
+		};
+		1FA452AB2F7CFA9B00822BFA /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1FA452A32F7CFA0E00822BFA /* StreamChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FA452A22F7CFA0E00822BFA /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChat;
+		};
+		1FA452A92F7CFA0E00822BFA /* StreamChatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FA452A22F7CFA0E00822BFA /* XCRemoteSwiftPackageReference "stream-chat-swift" */;
+			productName = StreamChatUI;
+		};
+		1FA452AC2F7CFA9B00822BFA /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FA452AB2F7CFA9B00822BFA /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1FA452432F7CE00700822BFA /* Project object */;
 }
