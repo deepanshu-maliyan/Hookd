@@ -131,7 +131,7 @@ struct ProfileCardView: View {
         case "casual": return .green
         case "hookup": return .red
         case "fwb": return .orange
-        case "explore": return .purple
+        case "explore": return Color(red: 1.0, green: 0.5, blue: 0)
         default: return .gray
         }
     }

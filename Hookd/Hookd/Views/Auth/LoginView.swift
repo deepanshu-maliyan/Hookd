@@ -12,7 +12,7 @@ struct LoginView: View {
         NavigationStack {
             ZStack {
                 LinearGradient(
-                    colors: [Color.pink.opacity(0.3), Color.purple.opacity(0.3)],
+                    colors: [Color.orange.opacity(0.3), Color(red: 1.0, green: 0.5, blue: 0).opacity(0.3)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -22,14 +22,14 @@ struct LoginView: View {
                     Spacer()
                     
                     VStack(spacing: 10) {
-                        Text("💘")
+                        Text("🔥")
                             .font(.system(size: 80))
                         
                         Text("Hookd")
                             .font(.system(size: 48, weight: .bold, design: .rounded))
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.pink, .purple],
+                                    colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -74,7 +74,7 @@ struct LoginView: View {
                             .frame(height: 56)
                             .background(
                                 LinearGradient(
-                                    colors: [.pink, .purple],
+                                    colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )

@@ -33,7 +33,7 @@ struct ProfileView: View {
                                                     .fontWeight(.bold)
                                                     .foregroundColor(.white)
                                                     .padding(6)
-                                                    .background(Color.pink)
+                                                    .background(Color.orange)
                                                     .cornerRadius(8)
                                                     .padding(8)
                                             }
@@ -117,7 +117,7 @@ struct ProfileView: View {
                                                 .padding(.vertical, 8)
                                                 .background(
                                                     LinearGradient(
-                                                        colors: [.purple, .pink],
+                                                        colors: [Color(red: 1.0, green: 0.5, blue: 0), .orange],
                                                         startPoint: .topLeading,
                                                         endPoint: .bottomTrailing
                                                     )
@@ -138,7 +138,7 @@ struct ProfileView: View {
                                 .padding()
                                 .background(
                                     LinearGradient(
-                                        colors: [.pink, .purple],
+                                        colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
@@ -156,7 +156,7 @@ struct ProfileView: View {
             }
             .background(
                 LinearGradient(
-                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.1)],
+                    colors: [Color(red: 1.0, green: 0.5, blue: 0).opacity(0.1), Color.orange.opacity(0.1)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -167,7 +167,7 @@ struct ProfileView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showSettings = true }) {
                         Image(systemName: "gearshape.fill")
-                            .foregroundColor(.pink)
+                            .foregroundColor(.orange)
                     }
                 }
             }
@@ -186,7 +186,7 @@ struct ProfileView: View {
         case "casual": return .green
         case "hookup": return .red
         case "fwb": return .orange
-        case "explore": return .purple
+        case "explore": return Color(red: 1.0, green: 0.5, blue: 0)
         default: return .gray
         }
     }

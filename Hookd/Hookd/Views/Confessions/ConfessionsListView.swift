@@ -12,7 +12,7 @@ struct ConfessionsListView: View {
         NavigationStack {
             ZStack {
                 LinearGradient(
-                    colors: [Color.orange.opacity(0.1), Color.pink.opacity(0.1)],
+                    colors: [Color.orange.opacity(0.1), Color(red: 1.0, green: 0.5, blue: 0).opacity(0.1)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -74,7 +74,7 @@ struct ConfessionsListView: View {
                             .font(.title2)
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.pink, .orange],
+                                    colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )

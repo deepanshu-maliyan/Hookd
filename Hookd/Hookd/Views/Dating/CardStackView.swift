@@ -51,13 +51,13 @@ struct CardStackView: View {
                                 .frame(width: 70, height: 70)
                                 .background(
                                     LinearGradient(
-                                        colors: [.pink, .red],
+                                        colors: [.orange, Color(red: 1.0, green: 0.4, blue: 0)],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )
                                 )
                                 .clipShape(Circle())
-                                .shadow(color: .pink.opacity(0.5), radius: 10, x: 0, y: 5)
+                                .shadow(color: Color.orange.opacity(0.5), radius: 10, x: 0, y: 5)
                         }
                         .disabled(isLiking)
                     }

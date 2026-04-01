@@ -19,7 +19,7 @@ struct OnboardingTagsView: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color.purple.opacity(0.2), Color.pink.opacity(0.2)],
+                colors: [Color(red: 1.0, green: 0.5, blue: 0).opacity(0.2), Color.orange.opacity(0.2)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -83,7 +83,7 @@ struct OnboardingTagsView: View {
                     .frame(height: 56)
                     .background(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [Color(red: 1.0, green: 0.5, blue: 0), .orange],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -151,11 +151,11 @@ struct TagPill: View {
                 .padding(.vertical, 10)
                 .background(
                     isSelected ?
-                    LinearGradient(colors: [.purple, .pink], startPoint: .leading, endPoint: .trailing) :
+                    LinearGradient(colors: [Color(red: 1.0, green: 0.5, blue: 0), .orange], startPoint: .leading, endPoint: .trailing) :
                     LinearGradient(colors: [Color(.systemGray6)], startPoint: .leading, endPoint: .trailing)
                 )
                 .cornerRadius(20)
-                .shadow(color: isSelected ? .purple.opacity(0.3) : .clear, radius: 5, x: 0, y: 2)
+                .shadow(color: isSelected ? Color(red: 1.0, green: 0.5, blue: 0).opacity(0.3) : .clear, radius: 5, x: 0, y: 2)
         }
         .buttonStyle(PlainButtonStyle())
         .animation(.spring(response: 0.3), value: isSelected)

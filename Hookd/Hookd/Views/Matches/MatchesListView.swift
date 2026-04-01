@@ -9,7 +9,7 @@ struct MatchesListView: View {
         NavigationStack {
             ZStack {
                 LinearGradient(
-                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.1)],
+                    colors: [Color(red: 1.0, green: 0.5, blue: 0).opacity(0.1), Color.orange.opacity(0.1)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -65,7 +65,7 @@ struct MatchesListView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { Task { await loadMatches() } }) {
                         Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.pink)
+                            .foregroundColor(.orange)
                     }
                     .disabled(isLoading)
                 }
@@ -143,7 +143,7 @@ struct MatchRowView: View {
                 } else {
                     Text("Say hi to \(match.matchedUser.name)!")
                         .font(.subheadline)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.orange)
                 }
                 
                 Text(match.timeAgo)
@@ -162,7 +162,7 @@ struct MatchRowView: View {
                         .frame(width: 24, height: 24)
                         .background(
                             LinearGradient(
-                                colors: [.pink, .purple],
+                                colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )

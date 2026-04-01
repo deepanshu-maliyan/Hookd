@@ -17,7 +17,7 @@ struct MatchOverlayView: View {
                     .font(.system(size: 48, weight: .bold, design: .rounded))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.pink, .purple, .orange],
+                            colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0), .orange],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -54,7 +54,7 @@ struct MatchOverlayView: View {
                         Circle()
                             .fill(
                                 LinearGradient(
-                                    colors: [.pink, .purple],
+                                    colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -86,7 +86,7 @@ struct MatchOverlayView: View {
                             .frame(height: 56)
                             .background(
                                 LinearGradient(
-                                    colors: [.pink, .purple],
+                                    colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )

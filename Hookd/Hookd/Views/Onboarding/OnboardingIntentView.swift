@@ -11,13 +11,13 @@ struct OnboardingIntentView: View {
         ("casual", "Casual Dating", "person.2.fill", "Taking it slow", .green),
         ("hookup", "Hookup", "flame.fill", "Just for tonight", .red),
         ("fwb", "Friends with Benefits", "star.fill", "No strings attached", .orange),
-        ("explore", "Exploring", "sparkles", "Still figuring it out", .purple)
+        ("explore", "Exploring", "sparkles", "Still figuring it out", Color(red: 1.0, green: 0.5, blue: 0))
     ]
     
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color.pink.opacity(0.2), Color.purple.opacity(0.2)],
+                colors: [Color.orange.opacity(0.2), Color(red: 1.0, green: 0.5, blue: 0).opacity(0.2)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -75,7 +75,7 @@ struct OnboardingIntentView: View {
                     .frame(height: 56)
                     .background(
                         LinearGradient(
-                            colors: [.pink, .purple],
+                            colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                             startPoint: .leading,
                             endPoint: .trailing
                         )

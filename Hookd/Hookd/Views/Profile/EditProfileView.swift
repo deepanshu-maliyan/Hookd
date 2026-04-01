@@ -89,7 +89,7 @@ struct EditProfileView: View {
                                         VStack {
                                             Image(systemName: "plus.circle.fill")
                                                 .font(.system(size: 32))
-                                                .foregroundColor(.pink)
+                                                .foregroundColor(.orange)
                                             Text("Add")
                                                 .font(.caption)
                                         }
@@ -148,7 +148,7 @@ struct EditProfileView: View {
                                         .padding(.vertical, 8)
                                         .background(
                                             selectedTags.contains(tag) ?
-                                            LinearGradient(colors: [.purple, .pink], startPoint: .leading, endPoint: .trailing) :
+                                            LinearGradient(colors: [Color(red: 1.0, green: 0.5, blue: 0), .orange], startPoint: .leading, endPoint: .trailing) :
                                             LinearGradient(colors: [Color(.systemGray6)], startPoint: .leading, endPoint: .trailing)
                                         )
                                         .cornerRadius(16)

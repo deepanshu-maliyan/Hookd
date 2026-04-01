@@ -11,7 +11,7 @@ struct DatingFeedView: View {
         NavigationStack {
             ZStack {
                 LinearGradient(
-                    colors: [Color.pink.opacity(0.1), Color.purple.opacity(0.1)],
+                    colors: [Color.orange.opacity(0.1), Color(red: 1.0, green: 0.5, blue: 0).opacity(0.1)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -62,7 +62,7 @@ struct DatingFeedView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { Task { await loadDiscovery() } }) {
                         Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.pink)
+                            .foregroundColor(.orange)
                     }
                     .disabled(isLoading)
                 }

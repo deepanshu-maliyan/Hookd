@@ -13,7 +13,7 @@ struct PhotoUploadView: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color.pink.opacity(0.2), Color.orange.opacity(0.2)],
+                colors: [Color.orange.opacity(0.2), Color(red: 1.0, green: 0.5, blue: 0).opacity(0.2)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -91,7 +91,7 @@ struct PhotoUploadView: View {
                     .frame(height: 56)
                     .background(
                         LinearGradient(
-                            colors: [.pink, .orange],
+                            colors: [.orange, Color(red: 1.0, green: 0.5, blue: 0)],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -181,7 +181,7 @@ struct PhotoThumbnail: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(4)
-                    .background(Color.pink)
+                    .background(Color.orange)
                     .cornerRadius(6)
                     .padding(6)
                     .offset(x: 0, y: -6)
