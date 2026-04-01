@@ -1,7 +1,8 @@
 import Foundation
 
 enum AppConstants {
-    static let backendBaseURL = "http://localhost:3000/api/v1"
+    // Use 127.0.0.1 instead of localhost for iOS Simulator compatibility
+    static let backendBaseURL = "http://127.0.0.1:3000/api/v1"
     static let streamAPIKey = "yd5k9k5jhufh"
     
     enum Endpoints {
