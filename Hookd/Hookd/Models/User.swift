@@ -1,0 +1,55 @@
+import Foundation
+
+struct User: Codable, Identifiable {
+    let id: String
+    var email: String
+    var name: String
+    var bio: String?
+    var age: Int
+    var gender: String
+    var intent: String
+    var fantasyTags: [String]
+    var photos: [String]
+    var isVerified: Bool
+    var streamUserId: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case name
+        case bio
+        case age
+        case gender
+        case intent
+        case fantasyTags = "fantasy_tags"
+        case photos
+        case isVerified = "is_verified"
+        case streamUserId = "stream_user_id"
+    }
+    
+    var displayName: String {
+        "\(name), \(age)"
+    }
+    
+    var intentDisplay: String {
+        switch intent {
+        case "serious": return "Serious Relationship"
+        case "casual": return "Casual Dating"
+        case "hookup": return "Hookup"
+        case "fwb": return "Friends with Benefits"
+        case "explore": return "Exploring"
+        default: return intent.capitalized
+        }
+    }
+    
+    var intentColor: String {
+        switch intent {
+        case "serious": return "blue"
+        case "casual": return "green"
+        case "hookup": return "red"
+        case "fwb": return "orange"
+        case "explore": return "purple"
+        default: return "gray"
+        }
+    }
+}
