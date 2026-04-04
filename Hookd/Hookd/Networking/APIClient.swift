@@ -41,7 +41,6 @@ class APIClient {
     private init() {
         decoder = JSONDecoder()
         encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
     }
     
     private func request<T: Decodable>(

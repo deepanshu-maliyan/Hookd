@@ -13,20 +13,6 @@ struct User: Codable, Identifiable {
     var isVerified: Bool?
     var streamUserId: String?
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case email
-        case name
-        case bio
-        case age
-        case gender
-        case intent
-        case fantasyTags = "fantasy_tags"
-        case photos
-        case isVerified = "is_verified"
-        case streamUserId = "stream_user_id"
-    }
-    
     var displayName: String {
         "\(name), \(age)"
     }
