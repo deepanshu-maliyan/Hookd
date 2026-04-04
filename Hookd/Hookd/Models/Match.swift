@@ -3,23 +3,12 @@ import Foundation
 struct Match: Codable, Identifiable {
     let id: String
     let userId: String
-    let matchedUserId: String
+    let matchedUserId: String?
     let matchedUser: User
     let createdAt: String
     let lastMessage: String?
     let lastMessageAt: String?
     let unreadCount: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case userId = "user_id"
-        case matchedUserId = "matched_user_id"
-        case matchedUser = "matched_user"
-        case createdAt = "created_at"
-        case lastMessage = "last_message"
-        case lastMessageAt = "last_message_at"
-        case unreadCount = "unread_count"
-    }
     
     var timeAgo: String {
         guard let lastMessageAt = lastMessageAt else { return "Just matched" }

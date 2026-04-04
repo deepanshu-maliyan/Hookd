@@ -31,7 +31,22 @@ export class ConfessionsController {
     @Query('limit') limit?: number,
     @Query('offset') offset?: number,
   ) {
-    return this.confessionsService.findAll(limit, offset);
+    const confessions = await this.confessionsService.findAll(limit, offset);
+    // Transform to match iOS expected format
+    const transformedConfessions = confessions.map(c => ({
+      id: c.id,
+      body: c.body,
+      imageUrl: c.imageUrl,
+      upvotes: 0,
+      commentCount: 0,
+      createdAt: c.createdAt,
+      isAnonymous: c.isAnonymous,
+      hasUpvoted: false,
+    }));
+    return { 
+      confessions: transformedConfessions, 
+      hasMore: confessions.length >= (limit || 20) 
+    };
   }
 
   @Get(':id')

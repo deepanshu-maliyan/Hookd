@@ -10,17 +10,6 @@ struct Confession: Codable, Identifiable {
     let isAnonymous: Bool
     let hasUpvoted: Bool?
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case body
-        case imageUrl = "image_url"
-        case upvotes
-        case commentCount = "comment_count"
-        case createdAt = "created_at"
-        case isAnonymous = "is_anonymous"
-        case hasUpvoted = "has_upvoted"
-    }
-    
     var timeAgo: String {
         let formatter = ISO8601DateFormatter()
         guard let date = formatter.date(from: createdAt) else { return "" }
@@ -45,21 +34,10 @@ struct Confession: Codable, Identifiable {
 struct ConfessionsResponse: Codable {
     let confessions: [Confession]
     let hasMore: Bool
-    
-    enum CodingKeys: String, CodingKey {
-        case confessions
-        case hasMore = "has_more"
-    }
 }
 
 struct CreateConfessionRequest: Codable {
     let body: String
     let imageUrl: String?
     let isAnonymous: Bool
-    
-    enum CodingKeys: String, CodingKey {
-        case body
-        case imageUrl = "image_url"
-        case isAnonymous = "is_anonymous"
-    }
 }

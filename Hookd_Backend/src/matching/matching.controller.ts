@@ -18,12 +18,28 @@ export class MatchingController {
 
   @Post('like/:targetId')
   async likeUser(@CurrentUser() user: User, @Param('targetId') targetId: string) {
-    return this.matchingService.likeUser(user.id, targetId);
+    const result = await this.matchingService.likeUser(user.id, targetId);
+    return { isMatch: result.matched, match: result.match || null };
   }
 
   @Get('matches')
   async getMatches(@CurrentUser() user: User) {
-    return this.matchingService.getMatches(user.id);
+    const matches = await this.matchingService.getMatches(user.id);
+    // Transform matches to include matchedUser
+    const transformedMatches = matches.map(match => {
+      const matchedUser = match.user1Id === user.id ? match.user2 : match.user1;
+      return {
+        id: match.id,
+        userId: user.id,
+        matchedUserId: matchedUser?.id,
+        matchedUser: matchedUser,
+        createdAt: match.createdAt,
+        lastMessage: null,
+        lastMessageAt: null,
+        unreadCount: 0,
+      };
+    });
+    return { matches: transformedMatches };
   }
 
   @Delete('unmatch/:matchId')
