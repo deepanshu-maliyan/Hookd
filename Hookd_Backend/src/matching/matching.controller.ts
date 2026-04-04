@@ -34,6 +34,7 @@ export class MatchingController {
 
   @Get('discovery')
   async getDiscoveryUsers(@CurrentUser() user: User) {
-    return this.matchingService.getDiscoveryUsers(user.id);
+    const users = await this.matchingService.getDiscoveryUsers(user.id);
+    return { users };
   }
 }
