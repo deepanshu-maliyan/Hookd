@@ -23,7 +23,18 @@ export class ConfessionsController {
     @CurrentUser() user: User,
     @Body() createConfessionDto: CreateConfessionDto,
   ) {
-    return this.confessionsService.create(user.id, createConfessionDto);
+    const confession = await this.confessionsService.create(user.id, createConfessionDto);
+    // Transform to match iOS expected format
+    return {
+      id: confession.id,
+      body: confession.body,
+      imageUrl: confession.imageUrl,
+      upvotes: 0,
+      commentCount: 0,
+      createdAt: confession.createdAt,
+      isAnonymous: confession.isAnonymous,
+      hasUpvoted: false,
+    };
   }
 
   @Get()
@@ -51,6 +62,16 @@ export class ConfessionsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.confessionsService.findOne(id);
+    const confession = await this.confessionsService.findOne(id);
+    return {
+      id: confession.id,
+      body: confession.body,
+      imageUrl: confession.imageUrl,
+      upvotes: 0,
+      commentCount: 0,
+      createdAt: confession.createdAt,
+      isAnonymous: confession.isAnonymous,
+      hasUpvoted: false,
+    };
   }
 }
