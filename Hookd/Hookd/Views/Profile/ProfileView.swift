@@ -10,10 +10,10 @@ struct ProfileView: View {
             ScrollView {
                 if let user = appState.currentUser {
                     VStack(spacing: 24) {
-                        if !user.photos.isEmpty {
+                        if let photos = user.photos, !photos.isEmpty {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 16) {
-                                    ForEach(Array(user.photos.enumerated()), id: \.offset) { index, photoUrl in
+                                    ForEach(Array(photos.enumerated()), id: \.offset) { index, photoUrl in
                                         AsyncImage(url: URL(string: photoUrl)) { phase in
                                             if let image = phase.image {
                                                 image
@@ -55,7 +55,7 @@ struct ProfileView: View {
                                             .font(.system(size: 32, weight: .regular))
                                             .foregroundColor(.secondary)
                                         
-                                        if user.isVerified {
+                                        if user.isVerified == true {
                                             Image(systemName: "checkmark.seal.fill")
                                                 .foregroundColor(.blue)
                                                 .font(.title2)
@@ -77,7 +77,7 @@ struct ProfileView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 14)
                                     .padding(.vertical, 8)
-                                    .background(intentColor(user.intent))
+                                       .background(intentColor(user.intent ?? ""))
                                     .cornerRadius(12)
                                 
                                 Text(user.gender)
@@ -101,14 +101,14 @@ struct ProfileView: View {
                                 }
                             }
                             
-                            if !user.fantasyTags.isEmpty {
+                            if let fantasyTags = user.fantasyTags, !fantasyTags.isEmpty {
                                 VStack(alignment: .leading, spacing: 12) {
                                     Text("My Vibes")
                                         .font(.headline)
                                         .fontWeight(.semibold)
                                     
                                     FlowLayout(spacing: 8) {
-                                        ForEach(user.fantasyTags, id: \.self) { tag in
+                                        ForEach(fantasyTags, id: \.self) { tag in
                                             Text(tag.replacingOccurrences(of: "-", with: " ").capitalized)
                                                 .font(.subheadline)
                                                 .fontWeight(.medium)

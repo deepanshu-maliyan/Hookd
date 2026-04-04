@@ -4,10 +4,14 @@ struct ProfileCardView: View {
     let user: User
     @State private var currentPhotoIndex = 0
     
+    private var photos: [String] {
+        user.photos ?? []
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                if user.photos.isEmpty {
+                if photos.isEmpty {
                     Rectangle()
                         .fill(LinearGradient(
                             colors: [.gray.opacity(0.3), .gray.opacity(0.5)],
@@ -25,7 +29,7 @@ struct ProfileCardView: View {
                         }
                 } else {
                     TabView(selection: $currentPhotoIndex) {
-                        ForEach(Array(user.photos.enumerated()), id: \.offset) { index, photoUrl in
+                        ForEach(Array(photos.enumerated()), id: \.offset) { index, photoUrl in
                             AsyncImage(url: URL(string: photoUrl)) { phase in
                                 switch phase {
                                 case .empty:
@@ -48,9 +52,9 @@ struct ProfileCardView: View {
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }
                 
-                if user.photos.count > 1 {
+                if photos.count > 1 {
                     HStack(spacing: 4) {
-                        ForEach(0..<user.photos.count, id: \.self) { index in
+                        ForEach(0..<photos.count, id: \.self) { index in
                             Capsule()
                                 .fill(currentPhotoIndex == index ? Color.white : Color.white.opacity(0.5))
                                 .frame(width: currentPhotoIndex == index ? 20 : 8, height: 4)
@@ -84,7 +88,7 @@ struct ProfileCardView: View {
                                     .background(intentColor)
                                     .cornerRadius(12)
                                 
-                                if user.isVerified {
+                                if user.isVerified == true {
                                     Image(systemName: "checkmark.seal.fill")
                                         .foregroundColor(.blue)
                                 }
@@ -101,10 +105,10 @@ struct ProfileCardView: View {
                             .lineLimit(3)
                     }
                     
-                    if !user.fantasyTags.isEmpty {
+                    if let tags = user.fantasyTags, !tags.isEmpty {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 8) {
-                                ForEach(user.fantasyTags, id: \.self) { tag in
+                                ForEach(tags, id: \.self) { tag in
                                     Text(tag.replacingOccurrences(of: "-", with: " ").capitalized)
                                         .font(.caption)
                                         .foregroundColor(.white)
@@ -126,7 +130,7 @@ struct ProfileCardView: View {
     }
     
     private var intentColor: Color {
-        switch user.intent {
+        switch user.intent ?? "" {
         case "serious": return .blue
         case "casual": return .green
         case "hookup": return .red

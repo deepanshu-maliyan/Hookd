@@ -8,101 +8,103 @@ struct CardStackView: View {
     @State private var isLiking = false
     
     var body: some View {
-        ZStack {
-            ForEach(Array(users.prefix(3).enumerated().reversed()), id: \.element.id) { index, user in
-                ProfileCardView(user: user)
-                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height * 0.7)
-                    .offset(x: index == 0 ? dragAmount.width : 0, y: index == 0 ? dragAmount.height * 0.3 : CGFloat(index * 5))
-                    .rotationEffect(.degrees(index == 0 ? Double(dragAmount.width / 20) : 0))
-                    .scaleEffect(index == 0 ? 1.0 : 1.0 - CGFloat(index) * 0.05)
-                    .opacity(index < 2 ? 1.0 : 0.5)
-                    .gesture(
-                        index == 0 ?
-                        DragGesture()
-                            .onChanged { value in
-                                dragAmount = value.translation
-                            }
-                            .onEnded { value in
-                                handleSwipe(value.translation)
-                            } : nil
-                    )
-                    .animation(.spring(response: 0.5, dampingFraction: 0.7), value: dragAmount)
-            }
-            
-            if !users.isEmpty {
-                VStack {
-                    Spacer()
-                    
-                    HStack(spacing: 40) {
-                        Button(action: { handleReject() }) {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.red)
-                                .frame(width: 70, height: 70)
-                                .background(Color.white)
-                                .clipShape(Circle())
-                                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
-                        }
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(Array(users.prefix(3).enumerated().reversed()), id: \.element.id) { index, user in
+                    ProfileCardView(user: user)
+                        .frame(width: geometry.size.width - 40, height: geometry.size.height * 0.7)
+                        .offset(x: index == 0 ? dragAmount.width : 0, y: index == 0 ? dragAmount.height * 0.3 : CGFloat(index * 5))
+                        .rotationEffect(.degrees(index == 0 ? Double(dragAmount.width / 20) : 0))
+                        .scaleEffect(index == 0 ? 1.0 : 1.0 - CGFloat(index) * 0.05)
+                        .opacity(index < 2 ? 1.0 : 0.5)
+                        .gesture(
+                            index == 0 ?
+                            DragGesture()
+                                .onChanged { value in
+                                    dragAmount = value.translation
+                                }
+                                .onEnded { value in
+                                    handleSwipe(value.translation)
+                                } : nil
+                        )
+                        .animation(.spring(response: 0.5, dampingFraction: 0.7), value: dragAmount)
+                }
+                
+                if !users.isEmpty {
+                    VStack {
+                        Spacer()
                         
-                        Button(action: { handleLike() }) {
-                            Image(systemName: "heart.fill")
-                                .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.white)
-                                .frame(width: 70, height: 70)
-                                .background(
-                                    LinearGradient(
-                                        colors: [.orange, Color(red: 1.0, green: 0.4, blue: 0)],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
+                        HStack(spacing: 40) {
+                            Button(action: { handleReject() }) {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 30, weight: .bold))
+                                    .foregroundColor(.red)
+                                    .frame(width: 70, height: 70)
+                                    .background(Color.white)
+                                    .clipShape(Circle())
+                                    .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+                            }
+                            
+                            Button(action: { handleLike() }) {
+                                Image(systemName: "heart.fill")
+                                    .font(.system(size: 30, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .frame(width: 70, height: 70)
+                                    .background(
+                                        LinearGradient(
+                                            colors: [.orange, Color(red: 1.0, green: 0.4, blue: 0)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
                                     )
-                                )
-                                .clipShape(Circle())
-                                .shadow(color: Color.orange.opacity(0.5), radius: 10, x: 0, y: 5)
+                                    .clipShape(Circle())
+                                    .shadow(color: Color.orange.opacity(0.5), radius: 10, x: 0, y: 5)
+                            }
+                            .disabled(isLiking)
                         }
-                        .disabled(isLiking)
+                        .padding(.bottom, 40)
                     }
-                    .padding(.bottom, 40)
                 }
-            }
-            
-            if dragAmount.width > 0 {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text("LIKE")
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundColor(.green)
-                            .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.green, lineWidth: 5)
-                            )
-                            .rotationEffect(.degrees(-20))
-                            .opacity(Double(dragAmount.width / 100))
-                        Spacer()
-                    }
-                    Spacer()
-                }
-                .padding(.top, 100)
-            } else if dragAmount.width < 0 {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text("NOPE")
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundColor(.red)
-                            .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.red, lineWidth: 5)
-                            )
-                            .rotationEffect(.degrees(20))
-                            .opacity(Double(-dragAmount.width / 100))
+                
+                if dragAmount.width > 0 {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text("LIKE")
+                                .font(.system(size: 40, weight: .bold))
+                                .foregroundColor(.green)
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.green, lineWidth: 5)
+                                )
+                                .rotationEffect(.degrees(-20))
+                                .opacity(Double(dragAmount.width / 100))
+                            Spacer()
+                        }
                         Spacer()
                     }
-                    Spacer()
+                    .padding(.top, 100)
+                } else if dragAmount.width < 0 {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text("NOPE")
+                                .font(.system(size: 40, weight: .bold))
+                                .foregroundColor(.red)
+                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.red, lineWidth: 5)
+                                )
+                                .rotationEffect(.degrees(20))
+                                .opacity(Double(-dragAmount.width / 100))
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                    .padding(.top, 100)
                 }
-                .padding(.top, 100)
             }
         }
     }

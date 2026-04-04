@@ -98,13 +98,13 @@ class AppState: ObservableObject {
             return
         }
         
-        if user.intent.isEmpty {
+        if user.intent == nil || user.intent?.isEmpty == true {
             needsOnboarding = true
             onboardingStep = .intent
-        } else if user.fantasyTags.isEmpty {
+        } else if user.fantasyTags == nil || user.fantasyTags?.isEmpty == true {
             needsOnboarding = true
             onboardingStep = .tags
-        } else if user.photos.count < 2 {
+        } else if (user.photos?.count ?? 0) < 2 {
             needsOnboarding = true
             onboardingStep = .photos
         } else {

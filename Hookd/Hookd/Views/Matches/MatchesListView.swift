@@ -98,7 +98,7 @@ struct MatchRowView: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            if let photoUrl = match.matchedUser.photos.first {
+            if let photoUrl = match.matchedUser.photos?.first {
                 AsyncImage(url: URL(string: photoUrl)) { phase in
                     if let image = phase.image {
                         image
@@ -128,7 +128,7 @@ struct MatchRowView: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                     
-                    if match.matchedUser.isVerified {
+                    if match.matchedUser.isVerified == true {
                         Image(systemName: "checkmark.seal.fill")
                             .foregroundColor(.blue)
                             .font(.caption)

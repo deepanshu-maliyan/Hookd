@@ -1,8 +1,11 @@
 import Foundation
 
 struct AuthResponse: Codable {
-    let token: String
+    let accessToken: String
     let user: User
+    
+    // Alias for convenience
+    var token: String { accessToken }
 }
 
 struct LoginRequest: Codable {
@@ -16,12 +19,4 @@ struct RegisterRequest: Codable {
     let name: String
     let age: Int
     let gender: String
-    
-    enum CodingKeys: String, CodingKey {
-        case email
-        case password
-        case name
-        case age
-        case gender
-    }
 }

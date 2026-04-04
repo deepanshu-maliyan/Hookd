@@ -30,7 +30,7 @@ export class MediaService {
   async generatePresignedUploadUrl(
     fileName: string,
     contentType: string,
-  ): Promise<string> {
+  ): Promise<{ uploadUrl: string; cdnUrl: string }> {
     const key = `${Date.now()}-${fileName}`;
 
     const command = new PutObjectCommand({
@@ -39,11 +39,14 @@ export class MediaService {
       ContentType: contentType,
     });
 
-    const presignedUrl = await getSignedUrl(this.s3Client, command, {
+    const uploadUrl = await getSignedUrl(this.s3Client, command, {
       expiresIn: 3600,
     });
 
-    return presignedUrl;
+    return {
+      uploadUrl,
+      cdnUrl: this.getPublicUrl(key),
+    };
   }
 
   getPublicUrl(key: string): string {

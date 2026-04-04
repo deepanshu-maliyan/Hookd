@@ -6,11 +6,12 @@ struct MatchOverlayView: View {
     @State private var showAnimation = false
     
     var body: some View {
-        ZStack {
-            Color.black.opacity(0.9)
-                .ignoresSafeArea()
-            
-            VStack(spacing: 30) {
+        GeometryReader { geometry in
+            ZStack {
+                Color.black.opacity(0.9)
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 30) {
                 Spacer()
                 
                 Text("It's a Match!")
@@ -34,7 +35,7 @@ struct MatchOverlayView: View {
                     .animation(.easeIn.delay(0.5), value: showAnimation)
                 
                 HStack(spacing: -30) {
-                    if let photoUrl = match.matchedUser.photos.first {
+                    if let photoUrl = match.matchedUser.photos?.first {
                         AsyncImage(url: URL(string: photoUrl)) { phase in
                             if let image = phase.image {
                                 image
@@ -112,22 +113,23 @@ struct MatchOverlayView: View {
                 .animation(.easeIn.delay(1.0), value: showAnimation)
             }
             
-            if showAnimation {
-                ForEach(0..<20) { _ in
-                    Text(["💘", "💖", "💗", "✨", "💫"].randomElement()!)
-                        .font(.system(size: 40))
-                        .position(
-                            x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
-                            y: CGFloat.random(in: 0...UIScreen.main.bounds.height)
-                        )
-                        .opacity(0.7)
+                if showAnimation {
+                    ForEach(0..<20) { _ in
+                        Text(["💘", "💖", "💗", "✨", "💫"].randomElement()!)
+                            .font(.system(size: 40))
+                            .position(
+                                x: CGFloat.random(in: 0...geometry.size.width),
+                                y: CGFloat.random(in: 0...geometry.size.height)
+                            )
+                            .opacity(0.7)
+                    }
+                    .transition(.scale.combined(with: .opacity))
+                    .animation(.easeOut(duration: 2.0), value: showAnimation)
                 }
-                .transition(.scale.combined(with: .opacity))
-                .animation(.easeOut(duration: 2.0), value: showAnimation)
             }
-        }
-        .onAppear {
-            showAnimation = true
+            .onAppear {
+                showAnimation = true
+            }
         }
     }
 }

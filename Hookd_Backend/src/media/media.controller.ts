@@ -18,10 +18,13 @@ export class MediaController {
 
   @Post('presigned-url')
   async getPresignedUrl(@Body() dto: PresignedUrlDto) {
-    const presignedUrl = await this.mediaService.generatePresignedUploadUrl(
+    const { uploadUrl, cdnUrl } = await this.mediaService.generatePresignedUploadUrl(
       dto.fileName,
       dto.contentType,
     );
-    return { presignedUrl };
+    return {
+      upload_url: uploadUrl,
+      cdn_url: cdnUrl,
+    };
   }
 }

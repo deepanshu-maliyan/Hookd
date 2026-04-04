@@ -170,8 +170,52 @@ class APIClient {
     }
     
     func getPresignedUrl(filename: String, contentType: String) async throws -> PresignedUrlResponse {
-        let endpoint = "\(AppConstants.Endpoints.presignedUrl)?filename=\(filename)&contentType=\(contentType)"
-        return try await request(endpoint: endpoint)
+        guard let url = URL(string: baseURL + AppConstants.Endpoints.presignedUrl) else {
+            throw APIError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token = try? KeychainHelper.loadToken() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let payload: [String: String] = [
+            "fileName": filename,
+            "contentType": contentType
+        ]
+        request.httpBody = try JSONSerialization.data(withJSONObject: payload, options: [])
+        
+        let data: Data
+        let response: URLResponse
+        
+        do {
+            (data, response) = try await URLSession.shared.data(for: request)
+        } catch {
+            throw APIError.networkError(error)
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.invalidResponse
+        }
+        
+        switch httpResponse.statusCode {
+        case 200...299:
+            do {
+                return try decoder.decode(PresignedUrlResponse.self, from: data)
+            } catch {
+                throw APIError.decodingError(error)
+            }
+        case 401:
+            throw APIError.unauthorized
+        case 400...599:
+            let message = try? JSONDecoder().decode([String: String].self, from: data)
+            throw APIError.serverError(httpResponse.statusCode, message?["error"] ?? message?["message"])
+        default:
+            throw APIError.unknown
+        }
     }
     
     func uploadToPresignedUrl(url: String, data: Data, contentType: String) async throws {
